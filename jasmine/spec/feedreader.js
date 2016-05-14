@@ -65,9 +65,8 @@ $(function() {
         });
       });
 
-        it('load into the DOM', function(done) {
+        it('load into the DOM', function() {
           expect(entries.length).not.toBe(0);
-          done();
         });
     });
 
@@ -86,7 +85,8 @@ $(function() {
         });
 
         it('loads new feed', function(done) {
-          expect(entries).not.toBe(newEntries);
+          // tests the first two entries, making sure they are not the same entry
+          expect(entries[0].innerHTML).not.toBe(newEntries[0].innerHTML);
           done();
         });
     });
