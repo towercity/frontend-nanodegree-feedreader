@@ -56,16 +56,17 @@ $(function() {
     });
 
     describe('Initial Entries', function() {
+      var entries;
+
       beforeEach(function(done) {
-        // Waits for data to load, as I don't see another way to do this at the moment
-        setTimeout(function() {
+        loadFeed(1, function() {
+          entries = $('.feed').children('.entry-link');
           done();
-        }, 900);
+        });
       });
 
         it('load into the DOM', function(done) {
-          var entries = $('.feed').children('.entry');
-          expect(entries).not.toBe(0);
+          expect(entries.length).not.toBe(0);
           done();
         });
     });
@@ -75,10 +76,12 @@ $(function() {
         var newEntries;
 
         beforeEach(function(done) {
-          entries = $('.feed').children('.entry');
           loadFeed(1, function() {
-            newEntries = $('.feed').children('.entry');
-            done();
+            entries = $('.feed').children('.entry-link');
+            loadFeed(2, function() {
+              newEntries = $('.feed').children('.entry-link');
+              done();
+            });
           });
         });
 
